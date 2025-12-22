@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Christmas Tree</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: transparent;
+            font-family: 'Brush Script Mt', 'Lucida Handwriting', cursive, sans-serif;
+        }
+
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index:  1;
+        }
+
+        #message-container{
+            position: absolute;
+            bottom: 8%;;
+            left: 50%;
+            transform: translateX(-50%);;
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+            width: 100%;
+        }
+        h1{
+            font-size: 3rem;
+            color: #FFF8DC;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 
+                0 0 5px #FFFFFF,
+                0 0 15px #ffd700,
+                0 0 25px #DAA520;
+            opacity: 0;
+            transition: opacity 3s ease-in-out;
+            animation: sparkleText 3s infinite alternate;
+        }
+
+        @keyframes sparkleText {
+            0% { text-shadow: 0 0 5px #FFFFFF, 0 0 10px #FFD700}
+            100% { text-shadow: 0 0 10px #FFFFFF, 0 0 20px #FFD700, 0 0 30px #DAA520}
+        }
+
+        h1.show {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="message-container">
+        <h1 id="merry-text">Merry Christmas</h1>
+    </div>
+    <canvas id="canvas"></canvas>
+
+    <script src="script.js"> </script>
+</body>
+</html>
