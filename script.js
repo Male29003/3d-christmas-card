@@ -51,7 +51,14 @@ function resize() {
 
   initShow();
 }
-window.addEventListener("resize", resize);
+let resizeTimeout;
+window.addEventListener("resize", function () {
+  clearTimeout(resizeTimeout);
+
+  resizeTimeout = setTimeout(function () {
+    resize();
+  }, 400);
+});
 
 function lerp(start, end, t) {
   return start * (1 - t) + end * t;
@@ -299,8 +306,8 @@ resize();
 function drawStar(cx, cy, time) {
   const rot = -Math.PI / 2;
   const spikes = 5;
-  const pulse = Math.sin(time * 0.05);
-  const currentScale = 1 + pulse * 0.15 * startTransiction;
+  const pulse = Math.sin(time * 0.08);
+  const currentScale = (1 + pulse * 0.15) * startTransiction;
   const outerRadius = 26 * currentScale;
   const innerRadius = 12 * currentScale;
   const fov = 350;
@@ -362,12 +369,12 @@ function animate() {
   const totalDistance = config.treeHeight + 150;
 
   let progress = Math.max(0, Math.min(1, distanceTop / totalDistance));
-  let currentSpeed = 0.3 + 2.0 * progress;
+  let currentSpeed = 1.0 + 2.0 * progress;
 
   if (revealY > treeTop - 50) {
     revealY -= currentSpeed;
   }
-  if (revealY <= treeTop + 50) {
+  if (revealY <= treeTop + 120) {
     isStarActive = true;
   }
   if (isStarActive && startTransiction < 1) {
@@ -399,7 +406,9 @@ function animate() {
   });
 
   ctx.globalCompositeOperation = "source-over";
-  drawStar(cx, cy, time);
+  if (isStarActive) {
+    drawStar(cx, cy, time);
+  }
 
   requestAnimationFrame(animate);
 }
