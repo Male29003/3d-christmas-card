@@ -10,7 +10,7 @@ const snowCount = 300;
 
 const config = {
   treeWidth: 350,
-  treeHeight: 650,
+  treeHeight: 600,
   layers: 9,
   spinSpeed: 0.008,
   fallChance: 0.001,
